@@ -1,11 +1,14 @@
-import weka.classifiers.trees.J48;  // Import Decision Tree classifier
-import weka.core.Instance;
+import weka.core.Instances;
+import weka.classifiers.functions.LinearRegression;
+import weka.classifiers.trees.J48;
+import weka.classifiers.evaluation.Evaluation;
+import weka.core.converters.ConverterUtils.DataSource;
 
 public class MachineLearningExample {
 
     public static void main(String[] args) {
         try {
-            // Load dataset
+            // Load dataset (replace with your dataset path)
             DataSource source = new DataSource("path/to/your/dataset.arff");
             Instances dataset = source.getDataSet();
 
@@ -21,15 +24,6 @@ public class MachineLearningExample {
             // Create and build the decision tree model
             J48 decisionTreeModel = new J48();
             decisionTreeModel.buildClassifier(dataset);
-
-            // Example: Make a prediction using linear regression
-            Instance newInstance = dataset.get(0);  // Using the first instance as an example
-            double linearRegressionPrediction = linearRegressionModel.classifyInstance(newInstance);
-            System.out.println("Linear Regression Prediction: " + linearRegressionPrediction);
-
-            // Example: Make a prediction using decision tree
-            double decisionTreePrediction = decisionTreeModel.classifyInstance(newInstance);
-            System.out.println("Decision Tree Prediction: " + decisionTreePrediction);
 
             // Evaluate the models
             Evaluation linearRegressionEvaluation = new Evaluation(dataset);
